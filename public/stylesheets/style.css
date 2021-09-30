@@ -1,0 +1,14 @@
+body {
+  padding: 50px;
+  font: 14px 'Poppins', Helvetica, Arial, sans-serif;
+  background-color: #2176FF;
+  color: white;
+  font-size: large;
+}
+p{
+  font: 'Helvetica';
+}
+
+a {
+  color: #00B7FF;
+}
