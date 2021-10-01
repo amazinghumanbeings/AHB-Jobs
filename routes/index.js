@@ -7,4 +7,8 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'AHB JOBS' });
 });
 
+router.get('/login',(req,res,next)=>{
+  res.send("login")
+})
+
 module.exports = router;
