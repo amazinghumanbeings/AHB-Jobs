@@ -6,7 +6,7 @@ const { NotFound } = require('http-errors');
 const {body,validationResult} = require('express-validator');
 const {register} = require('../controllers/registerController')
 const {login} = require('../controllers/loginController')
-
+const auth = require('../middleware/auth')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -43,5 +43,9 @@ router.post('/register',[
   .isEmail()
 
 ],  register);
+
+router.post("/welcome",auth,(req,res)=>{
+  res.status(200).send("Welcome 🙌 ");
+});
 
 module.exports = router;
