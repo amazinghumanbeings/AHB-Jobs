@@ -11,6 +11,7 @@ const session = require('express-session');
 require('./controllers/googleLogin')(passport)
 var authRoute = require('./routes/googleAuth')
 
+
 var app = express();
 
 // view engine setup
@@ -34,11 +35,20 @@ app.use(
 // Passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
-  
+
+//db ORM 
+const db = require('./models');
+
+//db.sequelize.sync({ force: true }).then(() => {
+//  console.log("Drop and re-sync db.");
+//});
+
+db.sequelize.sync();
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth',authRoute)
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

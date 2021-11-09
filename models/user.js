@@ -16,9 +16,17 @@ module.exports = (sequelize, DataTypes) => {
   User.init({
     name: DataTypes.STRING,
     email: DataTypes.STRING,
-    social_user_id: DataTypes.STRING,
-    password: DataTypes.STRING,
-    registration_type: DataTypes.ENUM('email', 'google', 'facebook')
+    social_user_id: DataTypes.STRING(255),
+    DoB: DataTypes.INTEGER,
+    gender: DataTypes.STRING,
+    experience: DataTypes.STRING,
+    experience_Year: DataTypes.INTEGER,
+    work: DataTypes.STRING,
+    bio: DataTypes.STRING(1234),
+    min_charge: DataTypes.INTEGER,
+    max_charge: DataTypes.INTEGER,
+    
+    
   }, {
     sequelize,
     modelName: 'User',
