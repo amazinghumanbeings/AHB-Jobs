@@ -46,7 +46,7 @@ const db = require('./models');
 db.sequelize.sync();
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', usersRouter);
 app.use('/auth',authRoute)
 
 

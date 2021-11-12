@@ -3,7 +3,7 @@ const dotenv = require('dotenv').config();
 const db = require('../models');
 const User = db.User;
 const op = db.Sequelize.Op;
-const con = require('../config/db').promise();
+
 
 module.exports = function(passport){
     passport.use(
@@ -26,7 +26,7 @@ module.exports = function(passport){
 
                 try {
                     
-                    const email = newUser.email
+                   
 
                     //let [user] = await con.execute(
                     //    `SELECT id , email , password FROM users WHERE email = '${email}';`

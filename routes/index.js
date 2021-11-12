@@ -12,7 +12,8 @@ router.get('/',ensureGuest, function(req, res, next) {
 });
 
 router.get('/welcome',ensureAuth,async (req,res)=>{
-  res.render('welcome',{user:req.user});
+  // res.render('welcome',{user:req.user});
+    res.json({user:req.user})
  })
 
  
