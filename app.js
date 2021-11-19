@@ -11,7 +11,7 @@ const session = require('express-session');
 require('./controllers/googleLogin')(passport)
 var authRoute = require('./routes/googleAuth')
 
-
+ 
 var app = express();
 
 // view engine setup

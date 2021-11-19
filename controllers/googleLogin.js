@@ -14,6 +14,8 @@ module.exports = function(passport){
                 callbackURL: '/auth/google/callback',
             },
             async (accessToken,refreshToken,profile,done)=>{
+                console.log(accessToken)
+                console.log('\n',refreshToken)
                 //user data from google
                 console.log('\n',profile)
                 console.log('\n',profile._json.sub)
