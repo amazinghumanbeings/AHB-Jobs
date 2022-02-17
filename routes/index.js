@@ -1,68 +1,54 @@
-var express                     = require('express');
-var router                      = express.Router();
-const {ensureAuth, ensureGuest} = require('../middleware/gAuth');
-const sendEmail                      = require('../controllers/mailController');
+var express = require("express");
+var router = express.Router();
 
-const { NotFound } = require('http-errors');
-const {body,validationResult} = require('express-validator');
+const verify = require("../controllers/GoogleLoginRN");
 
+const { OAuth2Client } = require("google-auth-library");
+const { NotFound } = require("http-errors");
+const { body, validationResult } = require("express-validator");
 
+const { ensureAuth, ensureGuest } = require("../middleware/gAuth");
+// const sendEmail = require("../controllers/mailController");
+// const { Result } = require("postcss");
 
-router.get('/l',(req,res,next)=>{
-  res.render('launch');
-})
+//To verify google logins by TokenID
 
-/* GET home page. */
-router.get('/',ensureGuest, function(req, res, next) {
-  res.render('index', { title: 'AHB JOBS' , user :""});
+router.post("/google/verify", (req, res) => {
+  const Token = req.body.idToken;
+  verify(Token)
+    .then((result) => {
+      console.log(result.jwtToken);
+      res.json({ JWTToken: result.jwtToken });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.send("failed");
+    });
 });
 
-router.get('/welcome',ensureAuth,async (req,res)=>{
-    // mail('testUser',req.user.email);
-    // console.log('user email',req.user.email);
-    sendEmail(req.user.email)
-    
-    res.json({user:req.user})
- })
+/* GET home page. */
+router.get("/", ensureGuest, function (req, res, next) {
+  res.render("index", { title: "AHB JOBS", user: "" });
+});
 
- 
-router.get('/logout',(req,res)=>{
-  req.logOut()
-  res.redirect('/')
-})
+//Test route
 
-/*
+router.post("/test", (req, res, next) => {
+  console.log(req.body.idToken);
+  res.json({ test: "works" });
+});
 
-//login - Method: GET
+router.get("/welcome", ensureAuth, async (req, res) => {
+  // mail('testUser',req.user.email);
+  // console.log('user email',req.user.email);
+  sendEmail(req.user.email);
 
-router.get('/login',ensureGuest,(req,res,next)=>{
-  res.render('login');
-})
+  res.json({ user: req.user });
+});
 
+router.get("/logout", (req, res) => {
+  req.logOut();
+  res.redirect("/");
+});
 
-
-//login - Method: POST
-
-router.post('/login',[
-  body('email',"invalid Email address")
-  .notEmpty()
-  .trim()
-  .isEmail()
-
-], login)
-
-router.get('/register',ensureGuest,(req,res,next)=>{
-  res.render('register')
-})
-
-router.post('/register',[
-  body('email',"invalid Email address")
-  .notEmpty()
-  .trim()
-  .isEmail()
-
-],  register);
-
-
-*/
 module.exports = router;
