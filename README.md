@@ -4,5 +4,6 @@ AHB jobs is a platform created to all entrepreneurs, business people, community 
 
 To run :
   * clone the repo  
-  * Run cmd  - $ npm run dev
+  * Run cmd  - `$ npm install` - To install node dependencies.
+  * Run cmd  - `$ npm run dev` - To run in developer mode.
   * For .env file contact the Team
