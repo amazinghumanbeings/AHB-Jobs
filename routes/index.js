@@ -8,8 +8,23 @@ const { NotFound } = require("http-errors");
 const { body, validationResult } = require("express-validator");
 
 const { ensureAuth, ensureGuest } = require("../middleware/gAuth");
+
+const db = require("../models/index");
+const User = db.user;
+
 // const sendEmail = require("../controllers/mailController");
 // const { Result } = require("postcss");
+
+//Test route
+
+router.get("/test", async (req, res, next) => {
+  const user = await User.create({
+    name: "test",
+    username: "testusername",
+  });
+
+  res.json({ test: "works" });
+});
 
 //To verify google logins by TokenID
 
@@ -29,13 +44,6 @@ router.post("/google/verify", (req, res) => {
 /* GET home page. */
 router.get("/", ensureGuest, function (req, res, next) {
   res.render("index", { title: "AHB JOBS", user: "" });
-});
-
-//Test route
-
-router.post("/test", (req, res, next) => {
-  console.log(req.body.idToken);
-  res.json({ test: "works" });
 });
 
 router.get("/welcome", ensureAuth, async (req, res) => {

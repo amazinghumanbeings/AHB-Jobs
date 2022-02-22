@@ -3,14 +3,12 @@ const dotenv = require("dotenv");
 const jwt = require("jsonwebtoken");
 
 const client = new OAuth2Client({
-  clientId:
-    "1008614041217-6ua0grb2cmdl8h3vnij3gvhc0lukka6j.apps.googleusercontent.com",
+  clientId: process.env.CLIENT_ID,
 });
 
 async function verify(Token) {
   const ticket = await client.verifyIdToken({
-    audience:
-      "1008614041217-6ua0grb2cmdl8h3vnij3gvhc0lukka6j.apps.googleusercontent.com",
+    audience: process.env.CLIENT_ID,
     idToken: Token,
   });
 

@@ -1,35 +1,35 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
-    }
-  };
-  User.init({
-    name: DataTypes.STRING,
-    email: DataTypes.STRING,
-    social_user_id: DataTypes.STRING(255),
+  const user = sequelize.define("user", {
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     DoB: DataTypes.INTEGER,
-    gender: DataTypes.STRING,
-    experience: DataTypes.STRING,
-    experience_Year: DataTypes.INTEGER,
-    work: DataTypes.STRING,
-    bio: DataTypes.STRING(1234),
-    min_charge: DataTypes.INTEGER,
-    max_charge: DataTypes.INTEGER,
-    
-    
-  }, {
-    sequelize,
-    modelName: 'User',
+    gender: DataTypes.ENUM("male", "female"),
+    email: DataTypes.STRING(255),
+    phone: DataTypes.STRING(255),
+    profile_photo: DataTypes.STRING(1234),
+    skills: DataTypes.STRING(1234),
+    Tagline: DataTypes.STRING,
+    Experience_Duration: DataTypes.STRING,
+    Experience_Level: DataTypes.ENUM("Begginer", "Intermediate", "Expert"),
+    Work_Description: DataTypes.STRING(1234),
+    Workmode: DataTypes.ENUM("online", "offline", "both"),
+    Distance: DataTypes.INTEGER,
+    Min_charge: DataTypes.INTEGER,
+    Max_charge: DataTypes.INTEGER,
+    Location: DataTypes.STRING,
+    Organization_name: DataTypes.STRING,
+    Organization_Job_role: DataTypes.STRING,
+    job_Roll: DataTypes.ENUM("fullTime", "partTime"),
+    Overall_rating: DataTypes.STRING,
+    referral_code: DataTypes.STRING,
+    refered_user: DataTypes.STRING,
+    coins: DataTypes.STRING,
   });
-  return User;
+  return user;
 };
